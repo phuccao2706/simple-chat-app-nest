@@ -23,3 +23,7 @@ input CatInput {
   age: Int!
   breed: String!
 }
+
+type Subscription {
+  catAdded: CreateCatDto!
+}

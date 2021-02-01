@@ -13,6 +13,7 @@ import { CatsModule } from './cats/cats.module';
     CatsModule,
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+      installSubscriptionHandlers: true,
     }),
     MongooseModule.forRoot(
       'mongodb+srv://phuccao2706:Nhoksock123@cluster0.yu8lh.mongodb.net/simple-chat?retryWrites=true&w=majority',
