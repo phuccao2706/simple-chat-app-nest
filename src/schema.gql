@@ -9,13 +9,23 @@ type CreateCatDto {
   breed: String!
 }
 
+type RoomDTO {
+  _id: ID!
+  title: String!
+  description: String!
+  createdBy: String!
+  createdAt: Float!
+}
+
 type Query {
   hello: String!
   cats: [CreateCatDto!]!
+  rooms: [RoomDTO!]!
 }
 
 type Mutation {
   createCat(input: CatInput!): CreateCatDto!
+  createRoom(input: RoomInput!): RoomDTO!
 }
 
 input CatInput {
@@ -24,6 +34,14 @@ input CatInput {
   breed: String!
 }
 
+input RoomInput {
+  title: String!
+  description: String!
+  createdBy: String!
+  createdAt: Float!
+}
+
 type Subscription {
   catAdded: CreateCatDto!
+  roomAdded: RoomDTO!
 }

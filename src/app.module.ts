@@ -7,10 +7,12 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
 import { CatsModule } from './cats/cats.module';
+import { RoomModules } from './room/room.module';
 
 @Module({
   imports: [
     CatsModule,
+    RoomModules,
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       installSubscriptionHandlers: true,
