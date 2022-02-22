@@ -1,19 +1,23 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
+import { UserDTO } from 'src/user/user.dto';
 
 @ObjectType()
 export class RoomDTO {
   @Field(() => ID)
   _id: string;
 
-  @Field()
-  readonly title: string;
+  @Field({ nullable: true })
+  readonly name?: string;
+
+  @Field({ nullable: true })
+  readonly description?: string;
 
   @Field()
-  readonly description: string;
+  readonly createdBy: UserDTO;
+
+  @Field(type => [UserDTO], { nullable: true })
+  readonly users?: UserDTO[];
 
   @Field()
-  readonly createdBy: string;
-
-  @Field()
-  readonly createdAt: number;
+  readonly createdAt?: number;
 }

@@ -1,20 +1,32 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import * as mongoose from 'mongoose';
 import { Document } from 'mongoose';
+import { User, User2 } from 'src/types/user';
 
-@Schema()
-export class RoomEntity extends Document {
-  @Prop({ required: true })
-  title!: string;
+export const RoomSchema = new mongoose.Schema({
+  name: String,
+  description: String,
+  createdBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+  },
+  users: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
 
-  @Prop()
-  description?: string;
+mongoose.model('Room', RoomSchema);
 
-  @Prop({ default: Date.now })
-  createdAt!: Date;
-
-  @Prop()
-  createdBy?: string;
+export interface Room extends Document {
+  name: string;
+  description: string;
+  createdBy: User;
+  users: User[];
+  createdAt: Date;
 }
-
-export type RoomDocument = RoomEntity & Document;
-export const RoomEntitySchema = SchemaFactory.createForClass(RoomEntity);

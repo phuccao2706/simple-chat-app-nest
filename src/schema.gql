@@ -2,46 +2,42 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
-type CreateCatDto {
-  id: ID!
-  name: String!
-  age: Int!
-  breed: String!
+type UserDTO {
+  _id: ID!
+  username: String!
+}
+
+type AnotherAuthDTO {
+  token: String!
 }
 
 type RoomDTO {
   _id: ID!
-  title: String!
-  description: String!
-  createdBy: String!
+  name: String
+  description: String
+  createdBy: UserDTO!
+  users: [UserDTO!]
   createdAt: Float!
 }
 
 type Query {
-  hello: String!
-  cats: [CreateCatDto!]!
   rooms: [RoomDTO!]!
+  room(_id: String!): RoomDTO!
+  users: [UserDTO!]!
 }
 
 type Mutation {
-  createCat(input: CatInput!): CreateCatDto!
   createRoom(input: RoomInput!): RoomDTO!
-}
-
-input CatInput {
-  name: String!
-  age: Int!
-  breed: String!
+  joinRoom(_id: String!): RoomDTO!
+  login(password: String!, username: String!): AnotherAuthDTO!
+  register(password: String!, username: String!): AnotherAuthDTO!
 }
 
 input RoomInput {
-  title: String!
+  name: String!
   description: String!
-  createdBy: String!
-  createdAt: Float!
 }
 
 type Subscription {
-  catAdded: CreateCatDto!
   roomAdded: RoomDTO!
 }
