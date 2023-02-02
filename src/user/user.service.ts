@@ -32,8 +32,6 @@ export class UserService {
       .findOne({ username })
       .select('username password createdAt');
 
-    console.log(user);
-
     if (!user) {
       throw new HttpException('Invalid credentials', HttpStatus.UNAUTHORIZED);
     }

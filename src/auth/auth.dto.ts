@@ -1,4 +1,5 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
+import { UserDTO } from 'src/user/user.dto';
 
 export interface AuthDTO {
   username: string;
@@ -7,8 +8,8 @@ export interface AuthDTO {
 
 @ObjectType()
 export class AnotherAuthDTO {
-  // @Field(() => ID)
-  // user: AuthDTO;
+  @Field()
+  user: UserDTO;
 
   @Field()
   readonly token: string;

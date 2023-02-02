@@ -19,7 +19,6 @@ export class AuthResolver {
     const auth: AuthDTO = { username, password };
 
     const user = await this.userService.findByLogin(auth);
-
     const payload: Payload = {
       _id: user._id,
       username: user.username,
@@ -27,7 +26,7 @@ export class AuthResolver {
 
     const token = await this.authService.signPayload(payload);
 
-    return { token };
+    return { token, user };
   }
 
   @Mutation(() => AnotherAuthDTO)
