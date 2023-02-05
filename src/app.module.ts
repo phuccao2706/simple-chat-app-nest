@@ -7,6 +7,7 @@ import { join } from 'path';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModules } from './auth/auth.module';
+import { PostModules } from './post/post.module';
 import { RoomModules } from './room/room.module';
 import { UserModules } from './user/user.module';
 
@@ -16,6 +17,7 @@ import { UserModules } from './user/user.module';
     RoomModules,
     UserModules,
     AuthModules,
+    PostModules,
     GraphQLModule.forRoot({
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
       installSubscriptionHandlers: true,

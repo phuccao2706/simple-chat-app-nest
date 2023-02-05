@@ -1,8 +1,11 @@
-import { Resolver, Mutation, Args } from '@nestjs/graphql';
+import { Resolver, Mutation, Args, Query, Context } from '@nestjs/graphql';
 import { Payload } from 'src/types/payload';
+import { UserDTO } from 'src/user/user.dto';
 import { UserService } from 'src/user/user.service';
 import { AuthDTO, AnotherAuthDTO } from './auth.dto';
 import { AuthService } from './auth.service';
+import { UseGuards } from '@nestjs/common';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @Resolver()
 export class AuthResolver {
@@ -10,6 +13,13 @@ export class AuthResolver {
     private userService: UserService,
     private authService: AuthService,
   ) {}
+
+  @Query(() => UserDTO)
+  @UseGuards(new AuthGuard())
+  async findByToken(@Context('user') user: Payload) {
+    console.log(user);
+    return await this.userService.findByPayload(user);
+  }
 
   @Mutation(() => AnotherAuthDTO)
   async login(

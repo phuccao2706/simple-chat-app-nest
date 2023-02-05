@@ -12,6 +12,15 @@ type AnotherAuthDTO {
   token: String!
 }
 
+type PostDTO {
+  _id: ID!
+  title: String
+  image: String
+  description: String
+  createdBy: UserDTO!
+  createdAt: Float!
+}
+
 type RoomDTO {
   _id: ID!
   name: String
@@ -25,6 +34,9 @@ type Query {
   rooms: [RoomDTO!]!
   room(_id: String!): RoomDTO!
   users: [UserDTO!]!
+  findByToken: UserDTO!
+  posts: [PostDTO!]!
+  post(_id: String!): PostDTO!
 }
 
 type Mutation {
@@ -32,10 +44,17 @@ type Mutation {
   joinRoom(_id: String!): RoomDTO!
   login(password: String!, username: String!): AnotherAuthDTO!
   register(password: String!, username: String!): AnotherAuthDTO!
+  createPost(input: PostInput!): PostDTO!
 }
 
 input RoomInput {
   name: String!
+  description: String!
+}
+
+input PostInput {
+  title: String!
+  image: String!
   description: String!
 }
 
