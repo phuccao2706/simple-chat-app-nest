@@ -26,6 +26,7 @@ export class AuthResolver {
     @Args('username') username: string,
     @Args('password') password: string,
   ) {
+    console.log(username, password);
     const auth: AuthDTO = { username, password };
 
     const user = await this.userService.findByLogin(auth);
